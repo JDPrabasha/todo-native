@@ -25,13 +25,21 @@ export default function App() {
     setTasks([...tasks, task]);
     setTask("");
   };
+
+  const completeTask = (index) => {
+    const newTasks = [...tasks];
+    newTasks.splice(index, 1);
+    setTasks(newTasks);
+  };
   return (
     <View style={styles.container}>
       <View style={styles.tasksWrapper}>
         <Text style={styles.sectionTitle}>Today's Tasks</Text>
         <View style={styles.items}>
-          {tasks.map((task) => (
-            <Task text={task} />
+          {tasks.map((task, index) => (
+            <TouchableOpacity key={index} onPress={() => completeTask(index)}>
+              <Task text={task} />
+            </TouchableOpacity>
           ))}
           {/* <Task text="Clean room" />
           <Task text="Go to gym" /> */}
